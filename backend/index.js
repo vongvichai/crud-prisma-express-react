@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import ProductRoute from './routes/ProductRoute.js'
 import UserRoute from './routes/UserRoute.js'
+import EmployeeRoute from './routes/EmployeeRoute.js'
 dotenv.config()
 
 const app = express()
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 })
 app.use(ProductRoute)
 app.use(UserRoute)
+app.use(EmployeeRoute)
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
