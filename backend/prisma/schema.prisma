@@ -18,57 +18,57 @@ model product {
 }
 
 model user {
-  id        Int      @id @default(autoincrement())
-  name      String
-  password  String
+  id       Int    @id @default(autoincrement())
+  name     String
+  password String
 
   employee employee?
 
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
 }
 
 model employee {
-  id            Int       @id @default(autoincrement())
-  firstName     String
-  lastName      String
-  email         String
+  id        Int    @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String
 
-  user          user      @relation(fields: [userId], references: [id])
-  userId        Int       @unique
-  department    department @relation(fields: [departmentId], references: [id])
-  departmentId  Int
-  leaves        leave[]
+  user         user       @relation(fields: [userId], references: [id])
+  userId       Int        @unique
+  department   department @relation(fields: [departmentId], references: [id])
+  departmentId Int
+  leaves       leave[]
 
-  createdAt     DateTime @default(now())
+  createdAt DateTime @default(now())
 }
 
 model department {
-  id        Int       @id @default(autoincrement())
-  name      String
+  id   Int    @id @default(autoincrement())
+  name String
 
   employees employee[]
-  
+
   createdAt DateTime @default(now())
 }
 
 model leave {
-  id          Int @id @default(autoincrement())
-  docNumber   String
-  docDate     DateTime
-  employee    employee  @relation(fields: [employeeId], references: [id])
-  employeeId  Int
-  leaveType   leaveType 
-  remarks     String
-  createdAt   DateTime  @default(now())
+  id         Int       @id @default(autoincrement())
+  docNumber  String
+  docDate    DateTime
+  employee   employee  @relation(fields: [employeeId], references: [id])
+  employeeId Int
+  leaveType  leaveType
+  remarks    String
+  createdAt  DateTime  @default(now())
 
-  leaveLines  leaveLine[]
+  leaveLines leaveLine[]
 }
 
 model leaveLine {
-  id        Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   startDate DateTime
   endDate   DateTime
-  leave    leave @relation(fields: [leaveId], references: [id])
+  leave     leave    @relation(fields: [leaveId], references: [id])
   leaveId   Int
   createdAt DateTime @default(now())
 }
@@ -79,4 +79,3 @@ enum leaveType {
   SICK
   OTHERS
 }
-

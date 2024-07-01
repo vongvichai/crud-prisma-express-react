@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Update Product
-PATCH http://localhost:5000/products/7
+PATCH http://localhost:5000/products/1
 Content-Type: application/json
 
 {
@@ -27,3 +27,74 @@ Content-Type: application/json
 
 ### Delete Product
 DELETE http://localhost:5000/products/1
+
+### Create User
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "vong",
+    "password": "1234"
+}
+
+### Create Department
+POST http://localhost:5000/departments
+Content-Type: application/json
+
+{
+    "name": "Information Technology"
+}
+
+### Create Employee
+POST http://localhost:5000/employees
+Content-Type: application/json
+
+{
+    "firstName": "Vichai",
+    "lastName": "Vongvorakul",
+    "email": "vongvorakul@gmail.com",
+    "userId": 1,
+    "departmentId": 1
+}
+
+### Get Employee
+GET http://localhost:5000/employees
+Content-Type: application/json
+
+### Create Leave
+POST http://localhost:5000/leaves
+Content-Type: application/json
+
+{
+    "docNumber": "Vichai",
+    "docDate": "2022-12-01 13:06:23",
+    "employeeId": 1, 
+    "leaveType": "ANUAL", 
+    "remarks": "This is a new employee",
+    "leaveLines": [
+        {"startDate": "2022-12-01 13:06:23", "endDate": "2022-12-01 13:06:23"},
+        {"startDate": "2022-12-02 13:06:23", "endDate": "2022-12-02 13:06:23"},
+        {"startDate": "2022-12-03 13:06:23", "endDate": "2022-12-03 13:06:23"}
+    ]
+}
+### Upsert Leave
+PATCH http://localhost:5000/leaves/1
+Content-Type: application/json
+
+{
+    "docNumber": "Vichai",
+    "docDate": "2022-12-01 13:06:23",
+    "employeeId": 1, 
+    "leaveType": "SICK", 
+    "remarks": "This is a upserted employee",
+    "leaveLines": [
+        {"id": 7, "startDate": "2022-12-13 13:06:23", "endDate": "2022-12-12 13:06:23"},
+        {"startDate": "2022-12-02 13:06:23", "endDate": "2022-12-02 13:06:23"},
+        {"startDate": "2022-12-03 13:06:23", "endDate": "2022-12-03 13:06:23"}
+    ]
+}
+
+### Get Leaves
+GET http://localhost:5000/leaves/1
+Content-Type: application/json
+

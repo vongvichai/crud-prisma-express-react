@@ -1,5 +1,5 @@
 import express from 'express'
-import { getEmployees, getEmployeeById, createEmployee, updateEmployee, deleteEmployee } from '../controller/EmployeeController.js'
+import { getEmployees, getEmployeeById, createEmployee, updateEmployee, deleteEmployee } from '../controllers/EmployeeController.js'
 
 const router = express.Router()
 
