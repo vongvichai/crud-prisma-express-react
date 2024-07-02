@@ -37,11 +37,13 @@ model Employee {
   updatedAt DateTime @updatedAt
 
   //relations
-  user         User       @relation(fields: [userId], references: [id])
-  userId       String     @unique
-  department   Department @relation(fields: [departmentId], references: [id])
-  departmentId String
-  leaves       Leave[]
+  user           User       @relation(fields: [userId], references: [id])
+  userId         String     @unique
+  department     Department @relation(fields: [departmentId], references: [id])
+  departmentId   String
+  departmentHead Boolean    @default(false)
+  requesters     Leave[]    @relation("requester")
+  approvers      Leave[]    @relation("approver")
 }
 
 model Department {
@@ -55,17 +57,22 @@ model Department {
 }
 
 model Leave {
-  id        String    @id @default(cuid())
-  docNumber String    @unique
-  docDate   DateTime
-  leaveType LeaveType
-  remarks   String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          String    @id @default(cuid())
+  docNumber   String    @unique
+  docDate     DateTime
+  leaveType   LeaveType
+  remarks     String
+  submittedAt DateTime
+  rejectedAt  DateTime
+  approvedAt  DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   //relations
-  employee   Employee    @relation(fields: [employeeId], references: [id])
+  employee   Employee    @relation("requester", fields: [employeeId], references: [id])
   employeeId String
+  approver   Employee?   @relation("approver", fields: [approverId], references: [id])
+  approverId String?
   leaveLines LeaveLine[]
 }
 
