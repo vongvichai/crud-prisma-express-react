@@ -19,7 +19,7 @@ export const getDepartmentById = async (req, res) =>
     {
         const response = await prisma.department.findUnique({
             where: {
-                id: Number(req.params.id),
+                id: req.params.id,
             },
         })
         res.status(200).json(response)

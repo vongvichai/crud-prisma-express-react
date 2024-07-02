@@ -10,70 +10,78 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model product {
+model Product {
   id        Int      @id @default(autoincrement())
   name      String
   price     Int
   createdAt DateTime @default(now())
 }
 
-model user {
-  id       Int    @id @default(autoincrement())
-  name     String
-  password String
-
-  employee employee?
-
+model User {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  password  String
+  updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+
+  //relations
+  employee Employee?
 }
 
-model employee {
-  id        Int    @id @default(autoincrement())
+model Employee {
+  id        String   @id @default(cuid())
   firstName String
   lastName  String
   email     String
-
-  user         user       @relation(fields: [userId], references: [id])
-  userId       Int        @unique
-  department   department @relation(fields: [departmentId], references: [id])
-  departmentId Int
-  leaves       leave[]
-
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String     @unique
+  department   Department @relation(fields: [departmentId], references: [id])
+  departmentId String
+  leaves       Leave[]
 }
 
-model department {
-  id   Int    @id @default(autoincrement())
-  name String
-
-  employees employee[]
-
+model Department {
+  id        String   @id @default(cuid())
+  name      String
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  employees Employee[]
 }
 
-model leave {
-  id         Int       @id @default(autoincrement())
-  docNumber  String
-  docDate    DateTime
-  employee   employee  @relation(fields: [employeeId], references: [id])
-  employeeId Int
-  leaveType  leaveType
-  remarks    String
-  createdAt  DateTime  @default(now())
+model Leave {
+  id        String    @id @default(cuid())
+  docNumber String    @unique
+  docDate   DateTime
+  leaveType LeaveType
+  remarks   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  leaveLines leaveLine[]
+  //relations
+  employee   Employee    @relation(fields: [employeeId], references: [id])
+  employeeId String
+  leaveLines LeaveLine[]
 }
 
-model leaveLine {
-  id        Int      @id @default(autoincrement())
+model LeaveLine {
+  id        String   @id @default(cuid())
   startDate DateTime
   endDate   DateTime
-  leave     leave    @relation(fields: [leaveId], references: [id])
-  leaveId   Int
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relations
+  leave   Leave  @relation(fields: [leaveId], references: [id])
+  leaveId String
 }
 
-enum leaveType {
+enum LeaveType {
   ANUAL
   BUSINESS
   SICK

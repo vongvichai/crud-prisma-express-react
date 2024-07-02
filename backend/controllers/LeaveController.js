@@ -1,4 +1,4 @@
-import { leaveType, PrismaClient } from '@prisma/client'
+import { LeaveType, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export const getLeaves = async (req, res) =>
@@ -23,7 +23,7 @@ export const getLeaveById = async (req, res) =>
   {
     const response = await prisma.leave.findUnique({
       where: {
-        id: Number(req.params.id),
+        id: req.params.id,
       },
       include: {
         leaveLines: true
@@ -80,7 +80,7 @@ export const updateLeave = async (req, res) =>
     });
     const leave = await prisma.leave.update({
       where: {
-        id: Number(req.params.id),
+        id: req.params.id,
       },
       data: {
         docNumber,

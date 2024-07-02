@@ -6,6 +6,7 @@ import UserRoute from './routes/UserRoute.js'
 import EmployeeRoute from './routes/EmployeeRoute.js'
 import DepartmentRoute from './routes/DepartmentRoute.js'
 import LeaveRoute from './routes/LeaveRoute.js'
+import LeaveLineRoute from './routes/LeaveLineRoute.js'
 dotenv.config()
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(UserRoute)
 app.use(EmployeeRoute)
 app.use(DepartmentRoute)
 app.use(LeaveRoute)
+app.use(LeaveLineRoute)
 
 app.listen(port, () =>
 {

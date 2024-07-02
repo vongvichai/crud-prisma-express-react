@@ -37,6 +37,10 @@ Content-Type: application/json
     "password": "1234"
 }
 
+### Create User
+GET http://localhost:5000/users/cly2rs3b30000a6dmcejph3qk
+Content-Type: application/json
+
 ### Create Department
 POST http://localhost:5000/departments
 Content-Type: application/json
@@ -44,6 +48,10 @@ Content-Type: application/json
 {
     "name": "Information Technology"
 }
+
+### Create Department
+GET http://localhost:5000/departments/cly2ruk3600007yk55fzl0mqw
+Content-Type: application/json
 
 ### Create Employee
 POST http://localhost:5000/employees
@@ -53,8 +61,8 @@ Content-Type: application/json
     "firstName": "Vichai",
     "lastName": "Vongvorakul",
     "email": "vongvorakul@gmail.com",
-    "userId": 1,
-    "departmentId": 1
+    "userId": "cly2rs3b30000a6dmcejph3qk",
+    "departmentId": "cly2ruk3600007yk55fzl0mqw"
 }
 
 ### Get Employee
@@ -66,9 +74,9 @@ POST http://localhost:5000/leaves
 Content-Type: application/json
 
 {
-    "docNumber": "Vichai",
+    "docNumber": "22405001",
     "docDate": "2022-12-01 13:06:23",
-    "employeeId": 1, 
+    "employeeId": "cly2rxsxk0002f2lgx1ym9q2r", 
     "leaveType": "ANUAL", 
     "remarks": "This is a new employee",
     "leaveLines": [
@@ -78,23 +86,26 @@ Content-Type: application/json
     ]
 }
 ### Upsert Leave
-PATCH http://localhost:5000/leaves/1
+PATCH http://localhost:5000/leaves/cly3vdaww0000b0th0rlycrui
 Content-Type: application/json
 
 {
-    "docNumber": "Vichai",
+    "docNumber": "22405001",
     "docDate": "2022-12-01 13:06:23",
-    "employeeId": 1, 
+    "employeeId": "cly2rxsxk0002f2lgx1ym9q2r", 
     "leaveType": "SICK", 
     "remarks": "This is a upserted employee",
     "leaveLines": [
-        {"id": 7, "startDate": "2022-12-13 13:06:23", "endDate": "2022-12-12 13:06:23"},
+        {"id": "3", "startDate": "2022-12-13 13:06:23", "endDate": "2022-12-12 13:06:23"},
         {"startDate": "2022-12-02 13:06:23", "endDate": "2022-12-02 13:06:23"},
         {"startDate": "2022-12-03 13:06:23", "endDate": "2022-12-03 13:06:23"}
     ]
 }
 
 ### Get Leaves
-GET http://localhost:5000/leaves/1
+GET http://localhost:5000/leaves
 Content-Type: application/json
 
+### Get Leave Lines
+GET http://localhost:5000/leave-lines
+Content-Type: application/json
