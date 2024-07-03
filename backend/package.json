@@ -6,7 +6,9 @@
     "main": "index.js",
     "scripts": {
         "dev": "nodemon index",
-        "start": "node index.js"
+        "start": "node index.js",
+        "seed": "node prisma/seed.js",
+        "db:reset": "npx prisma db push --force-reset"
     },
     "author": "Faisal Fajri",
     "license": "ISC",
