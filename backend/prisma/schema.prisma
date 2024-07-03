@@ -62,9 +62,9 @@ model Leave {
   docDate     DateTime
   leaveType   LeaveType
   remarks     String
-  submittedAt DateTime
-  rejectedAt  DateTime
-  approvedAt  DateTime
+  submittedAt DateTime?
+  rejectedAt  DateTime?
+  approvedAt  DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 

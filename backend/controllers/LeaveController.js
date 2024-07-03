@@ -121,8 +121,33 @@ export const deleteLeave = async (req, res) =>
   {
     const leave = await prisma.leave.delete({
       where: {
-        id: Number(req.params.id),
+        id: req.params.id,
       },
+    })
+    res.status(200).json(leave)
+  } catch (error)
+  {
+    res.status(400).json({ msg: error.message })
+  }
+}
+
+export const setLeaveStatus = async (req, res) => 
+{
+  let { id, submittedAt, approvedAt, rejectedAt } = req.body
+  submittedAt = submittedAt ? new Date(submittedAt) : null;
+  approvedAt = approvedAt ? new Date(approvedAt) : null;
+  rejectedAt = rejectedAt ? new Date(rejectedAt) : null;
+  try
+  {
+    const leave = await prisma.leave.update({
+      where: {
+        id: req.params.id
+      },
+      data: {
+        submittedAt,
+        approvedAt,
+        rejectedAt
+      }
     })
     res.status(200).json(leave)
   } catch (error)
